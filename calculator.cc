@@ -167,7 +167,10 @@ std::bitset <5> operationBit(std::bitset<5>& input1, std::bitset<5>& input2, int
 */
 void verifyIfTrue(std::string& path){
     std::ofstream signalOutput("Results/Binaries/SignalOutput.csv"), 
-        ValueOutput("Results/Binaries/ValueOutput.csv"),TruthsTableOutput("Results/Binaries/TruthsTableOutput.csv");
+        ValueOutput("Results/Binaries/ValueOutput.csv"),TruthsTableOutput("Results/Binaries/TruthsTableOutput.csv"),
+        ValueOutputSignal("Results/IndividualBinaries/Signal.csv"),ValueOutputY5("Results/IndividualBinaries/ValueY5.csv"),
+        ValueOutputY4("Results/IndividualBinaries/ValueY4.csv"), ValueOutputY3("Results/IndividualBinaries/ValueY3.csv"),
+        ValueOutputY2("Results/IndividualBinaries/ValueY2.csv"), ValueOutputY1("Results/IndividualBinaries/ValueY1.csv");
     std::ifstream inputs(path);
     int line_index{0};
     std::string line{};
@@ -184,6 +187,29 @@ void verifyIfTrue(std::string& path){
         TruthsTableOutput << line[0] << "\t\t"  << input1.to_string().substr(1,5) << "\t " 
                           << line[5] <<  "\t\t" << input2.to_string().substr(1,5) << "\t\t " 
                           << calculator_signal << "\t\t " << valueResult.to_string() << std::endl;
+        if(calculator_signal){
+        ValueOutputSignal << line << std::endl; 
+        }
+        if (valueResult.to_string().substr(0,1) == "1")
+        {
+        ValueOutputY5 << line << std::endl;
+        }
+        if (valueResult.to_string().substr(1,1) == "1")
+        {
+        ValueOutputY4 << line << std::endl;
+        }
+        if (valueResult.to_string().substr(2,1) == "1")
+        {
+        ValueOutputY3 << line << std::endl;
+        }
+        if (valueResult.to_string().substr(3,1) == "1")
+        {
+        ValueOutputY2 << line << std::endl;
+        }
+        if (valueResult.to_string().substr(4,1) == "1")
+        {
+        ValueOutputY1 << line << std::endl;
+        }
         line_index++;
     }
     TruthsTableOutput.close();
